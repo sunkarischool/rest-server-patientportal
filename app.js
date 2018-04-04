@@ -37,7 +37,7 @@ app.all('*', function(req, res, next){
     return next();
   };
 
- res.redirect('https://'+req.hostname+':'+app.get('secPort')+req.url);
+ res.redirect('https://'+req.hostname+req.url);
 });
 
 // view engine setup
