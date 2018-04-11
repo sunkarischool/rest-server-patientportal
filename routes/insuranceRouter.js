@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-var Insurance = require('../models/Insurance');
+var Insurances = require('../models/Insurances');
 var Verify = require('./verify');
 
 var insuranceRouter = express.Router();
@@ -10,7 +10,7 @@ insuranceRouter.use(bodyParser.json());
 
 insuranceRouter.route('/')
 .get(function (req, res, next) {
-    Insurance.find(req.query)
+    Insurances.find(req.query)
         .exec(function (err, insurance) {
         if (err) return next(err);
         res.json(insurance);
@@ -18,7 +18,7 @@ insuranceRouter.route('/')
 })
 
 .post(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function (req, res, next) {
-    Insurance.create(req.body, function (err, insurance) {
+    Insurances.create(req.body, function (err, insurance) {
         if (err) return next(err);
         console.log('insurance created!');
         var id = insurance._id;
@@ -31,7 +31,7 @@ insuranceRouter.route('/')
 })
 
 .delete(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function (req, res, next) {
-    Insurance.remove({}, function (err, resp) {
+    Insurances.remove({}, function (err, resp) {
         if (err) return next(err);
         res.json(resp);
     });
@@ -39,7 +39,7 @@ insuranceRouter.route('/')
 
 insuranceRouter.route('/:insuranceId')
 .get(function (req, res, next) {
-    Insurance.findById(req.params.insuranceId)
+    Insurances.findById(req.params.insuranceId)
         .exec(function (err, insurance) {
         if (err) return next(err);
         res.json(insurance);
@@ -47,7 +47,7 @@ insuranceRouter.route('/:insuranceId')
 })
 
 .put(Verify.verifyOrdinaryUser, Verify.verifyAdmin,function (req, res, next) {
-    Insurance.findByIdAndUpdate(req.params.insuranceId, {
+    Insurances.findByIdAndUpdate(req.params.insuranceId, {
         $set: req.body
     }, {
         new: true
@@ -58,7 +58,7 @@ insuranceRouter.route('/:insuranceId')
 })
 
 .delete(Verify.verifyOrdinaryUser, Verify.verifyAdmin,function (req, res, next) {
-    Insurance.findByIdAndRemove(req.params.insuranceId, function (err, resp) {
+    Insurances.findByIdAndRemove(req.params.insuranceId, function (err, resp) {
         if (err) return next(err);
         res.json(resp);
     });

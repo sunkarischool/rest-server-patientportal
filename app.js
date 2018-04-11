@@ -25,8 +25,8 @@ var visits = require('./routes/visitRouter');
 //var address = require('./routes/addressRouter');
 var medications = require('./routes/medicationRouter');
 var messages = require('./routes/messageRouter');
-var insurance = require('./routes/insuranceRouter');
-var billing = require('./routes/billingRouter');
+var insurances = require('./routes/insuranceRouter');
+var bills = require('./routes/billRouter');
 
 var app = express();
 
@@ -67,8 +67,8 @@ app.use('/visits',visits);
 //app.use('/address',address);
 app.use('/medications',medications);
 app.use('/messages',messages);
-app.use('/billing',billing);
-app.use('/insurance',insurance);
+app.use('/bills',bills);
+app.use('/insurance',insurances);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

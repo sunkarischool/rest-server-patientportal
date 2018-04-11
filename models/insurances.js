@@ -2,41 +2,34 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-// create a schema
-var leaderSchema = new Schema({
-    name: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    image: {
+var insurancesSchema = new Schema({
+    patientId: {
         type: String,
         required: true
     },
-    designation: {
+    healthPlan:{
         type: String,
         required: true
     },
-    abbr: {
+    healthProduct:{
         type: String,
         required: true
     },
-    description: {
+    groupNumber:{
+        type: String
+    },
+    contact:{
         type: String,
         required: true
-    },
-    featured: {
-        type: Boolean,
-        default:false
     }
-
+    
 }, {
     timestamps: true
 });
 
 // the schema is useless so far
 // we need to create a model using it
-var Leaders = mongoose.model('Leader', leaderSchema);
+var Insurances = mongoose.model('Insurance', insurancesSchema);
 
 // make this available to our Node applications
-module.exports = Leaders;
+module.exports = Insurances;

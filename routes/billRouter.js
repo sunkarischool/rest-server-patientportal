@@ -2,28 +2,28 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-var Billing = require('../models/billing');
+var Bills = require('../models/bills');
 var Verify = require('./verify');
 
-var billingRouter = express.Router();
-billingRouter.use(bodyParser.json());
+var billRouter = express.Router();
+billRouter.use(bodyParser.json());
 
-billingRouter.route('/')
+billRouter.route('/')
 .get(function (req, res, next) {
-    Billing.find(req.query)
-        .exec(function (err, bills) {
+    Bills.find(req.query)
+        .exec(function (err, bill) {
             console.log(req.query);
-            console.log(bills);
+            console.log(bill);
         if (err) return next(err);
-        res.json(bills);
+        res.json(bill);
     });
 })
 
 .post(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function (req, res, next) {
-    Billing.create(req.body, function (err, billing) {
+    Bills.create(req.body, function (err, bill) {
         if (err) return next(err);
         console.log('billing created!');
-        var id = billing._id;
+        var id = bill._id;
 
         res.writeHead(200, {
             'Content-Type': 'text/plain'
@@ -33,15 +33,15 @@ billingRouter.route('/')
 })
 
 .delete(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function (req, res, next) {
-    Billing.remove({}, function (err, resp) {
+    Bills.remove({}, function (err, resp) {
         if (err) return next(err);
         res.json(resp);
     });
 });
 
-billingRouter.route('/:billingId')
+billRouter.route('/:billingId')
 .get(function (req, res, next) {
-    Billing.findById(req.params.billingId)
+    Bills.findById(req.params.billingId)
         .exec(function (err, billing) {
         if (err) return next(err);
         res.json(billing);
@@ -49,21 +49,21 @@ billingRouter.route('/:billingId')
 })
 
 .put(Verify.verifyOrdinaryUser, Verify.verifyAdmin,function (req, res, next) {
-    Billing.findByIdAndUpdate(req.params.billingId, {
+    Bills.findByIdAndUpdate(req.params.billingId, {
         $set: req.body
     }, {
         new: true
-    }, function (err, billing) {
+    }, function (err, bill) {
         if (err) return next(err);
-        res.json(billing);
+        res.json(bill);
     });
 })
 
 .delete(Verify.verifyOrdinaryUser, Verify.verifyAdmin,function (req, res, next) {
-    Billing.findByIdAndRemove(req.params.billingId, function (err, resp) {
+    Bills.findByIdAndRemove(req.params.billingId, function (err, resp) {
         if (err) return next(err);
         res.json(resp);
     });
 });
 
-module.exports = billingRouter;
+module.exports = billRouter;

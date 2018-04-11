@@ -4,41 +4,41 @@ var Schema = mongoose.Schema;
 require('mongoose-currency').loadType(mongoose);
 var Currency = mongoose.Types.Currency;
 
-// create a schema
-var promotionSchema = new Schema({
-    name: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    image: {
+var billsSchema = new Schema({
+    patientId: {
         type: String,
         required: true
     },
-    label: {
-        type: String,
-        default: ''
+    dateOfService:{
+        type: Date,
+        required: true
     },
-    price: {
+    provider:{
+        type: String
+    },
+    serviceDetails:{
+        type: String
+    },
+    amountBilled:{
         type: Currency,
         required: true
     },
-    description: {
-        type: String,
+    copayPaid:{
+        type: Currency,
         required: true
     },
-    featured: {
-        type: Boolean,
-        default:false
+    copayDue:{
+        type: Currency,
+        required: true
     }
-
+    
 }, {
     timestamps: true
 });
 
 // the schema is useless so far
 // we need to create a model using it
-var Promotions = mongoose.model('Promotion', promotionSchema);
+var Bills = mongoose.model('billing', billsSchema);
 
 // make this available to our Node applications
-module.exports = Promotions;
+module.exports = Bills;
