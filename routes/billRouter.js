@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-var bills = require('../models/bills');
+var Bills = require('../models/bills');
 var Verify = require('./verify');
 
 var billRouter = express.Router();
@@ -10,7 +10,7 @@ billRouter.use(bodyParser.json());
 
 billRouter.route('/')
 .get(function (req, res, next) {
-    bills.find(req.query)
+    Bills.find(req.query)
         .exec(function (err, bill) {
             console.log(req.query);
             console.log(bill);
@@ -20,7 +20,7 @@ billRouter.route('/')
 })
 
 .post(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function (req, res, next) {
-    bills.create(req.body, function (err, bill) {
+    Bills.create(req.body, function (err, bill) {
         if (err) return next(err);
         console.log('bill created!');
         var id = bill._id;
@@ -33,7 +33,7 @@ billRouter.route('/')
 })
 
 .delete(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function (req, res, next) {
-    bills.remove({}, function (err, resp) {
+    Bills.remove({}, function (err, resp) {
         if (err) return next(err);
         res.json(resp);
     });
@@ -41,7 +41,7 @@ billRouter.route('/')
 
 billRouter.route('/:billId')
 .get(function (req, res, next) {
-    bills.findById(req.params.billId)
+    Bills.findById(req.params.billId)
         .exec(function (err, bill) {
         if (err) return next(err);
         res.json(bill);
@@ -49,7 +49,7 @@ billRouter.route('/:billId')
 })
 
 .put(Verify.verifyOrdinaryUser, Verify.verifyAdmin,function (req, res, next) {
-    bills.findByIdAndUpdate(req.params.billId, {
+    Bills.findByIdAndUpdate(req.params.billId, {
         $set: req.body
     }, {
         new: true
@@ -60,7 +60,7 @@ billRouter.route('/:billId')
 })
 
 .delete(Verify.verifyOrdinaryUser, Verify.verifyAdmin,function (req, res, next) {
-    bills.findByIdAndRemove(req.params.billId, function (err, resp) {
+    Bills.findByIdAndRemove(req.params.billId, function (err, resp) {
         if (err) return next(err);
         res.json(resp);
     });
