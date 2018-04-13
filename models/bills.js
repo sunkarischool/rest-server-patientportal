@@ -31,14 +31,13 @@ var billsSchema = new Schema({
         type: Currency,
         required: true
     }
-    
 }, {
     timestamps: true
 });
 
 // the schema is useless so far
 // we need to create a model using it
-var Bills = mongoose.model('billing', billsSchema);
+var Bills = mongoose.model('Bills', billsSchema);
 
 // make this available to our Node applications
 module.exports = Bills;
