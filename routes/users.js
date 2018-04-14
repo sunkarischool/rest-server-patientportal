@@ -22,8 +22,8 @@ router.post('/register', function(req, res) {
         }
         user.save(function(err,user) {
             passport.authenticate('local')(req, res, function () {
-              //var patient = new Patient({username: req.body.username, lastName: req.body.lastname, firstName: req.body.firstname,
-             // MI: req.body.MI, email: req.body.email, gender: req.body.gender, dob: req.body.dob, ssn: req.body.ssn});
+              var patient = new Patient({username: req.body.username, lastName: req.body.lastname, firstName: req.body.firstname,
+              MI: req.body.MI, email: req.body.email, gender: req.body.gender, dob: req.body.dob, ssn: req.body.ssn});
               Patient.create(req.body, function (err, patient) {
               });
               return res.status(200).json({status: 'Registration Successful!'});
