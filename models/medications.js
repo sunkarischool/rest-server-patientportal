@@ -7,6 +7,10 @@ var medicationsSchema = new Schema({
         type: String,
         required: true
     },
+    orderedBy: {
+        type: String,
+        required: true
+    },
     orderedDate: {
         type: Date,
         required: true
