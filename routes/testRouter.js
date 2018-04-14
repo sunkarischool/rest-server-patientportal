@@ -39,7 +39,7 @@ testRouter.route('/')
     });
 });
 
-visitRouter.route('/:visitId')
+testRouter.route('/:visitId')
 .get(function (req, res, next) {
     Tests.findById(req.params.visitId)
         .exec(function (err, visit) {

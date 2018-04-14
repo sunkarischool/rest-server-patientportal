@@ -47,7 +47,7 @@ var testsSchema = new Schema({
 
 // the schema is useless so far
 // we need to create a model using it
-var Visits = mongoose.model('Visits', visitsSchema);
+var Tests = mongoose.model('Tests', testsSchema);
 
 // make this available to our Node applications
-module.exports = Visits;
+module.exports = Tests;
