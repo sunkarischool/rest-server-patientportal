@@ -7,7 +7,7 @@ var imageSchema = new Schema({
         type: String,
         required: true
     },
-    imagType:  {
+    imageType:  {
         type: String,
         required: false
     },
