@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-var Medications = require('../models/Medications');
+var Medications = require('../models/medications');
 var Verify = require('./verify');
 
 var medicationRouter = express.Router();

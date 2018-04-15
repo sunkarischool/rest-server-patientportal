@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-var Insurances = require('../models/Insurances');
+var Insurances = require('../models/insurances');
 var Verify = require('./verify');
 
 var insuranceRouter = express.Router();

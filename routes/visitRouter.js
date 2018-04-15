@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-var Visits = require('../models/Visits');
+var Visits = require('../models/visits');
 var Verify = require('./verify');
 
 var visitRouter = express.Router();
